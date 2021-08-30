@@ -41,6 +41,7 @@ plt.plot(xp, yp, 'g--', label="Initial guess")
 
 # Update parameters w and b and set learning rate
 alpha = 0.0002
+# Iteration over epochs
 for _ in range(50):
     w = w - alpha * grad_w(x, y, w, b)
     b = b - alpha * grad_b(x, y, w, b)
