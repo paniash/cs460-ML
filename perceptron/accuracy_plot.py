@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from averaged_perceptron import averaged_activation, averaged_correction
 from vanilla_perceptron import activation, correction
 
