@@ -28,50 +28,55 @@ X_test, y_test = X[200:, :], y[200:]
 #########################
 vanilla_accuracy = []
 
-for epoch in epochs:
-    vanilla_weights = np.zeros(X_train[0].size, dtype=float)
-    vanilla_bias = 0
+for epoch in tqdm(epochs):
+    weights = np.zeros(X[0].size, dtype=float)
+    bias = 0
 
-    vanilla_weights, vanilla_bias = correction(vanilla_weights, X_train, y_train,
-            vanilla_bias, epoch)
+    # Train the perceptron for the weights
+    weights, bias = correction(weights, X_train, y_train, bias, epoch)
 
     # Storing predicted values
-    vanilla_prediction = np.zeros(len(y_test))
+    prediction = np.zeros(len(y_test))
     for i in range(len(y_test)):
-        vanilla_prediction[i] = activation(weights, X_train[i], bias)
+        prediction[i] = activation(weights, X_test[i], bias)
 
     # Calculating accuracy of vanilla perceptron
-    vanilla_correct = 0
+    correct = 0
     for i in range(len(y_test)):
-        if vanilla_prediction[i] == y_test[i]:
-            vanilla_correct += 1
+        if prediction[i] == y_test[i]:
+            correct += 1
 
-    vanilla_accuracy.append(vanilla_correct/y_test.size * 100)
+    vanilla_accuracy.append(correct/y_test.size * 100)
+
 
 #########################
 ## Averaged perceptron ##
 #########################
 avg_accuracy = []
 
-for epoch in epochs:
-    avg_weights = np.zeros(X_train[0].size, dtype=float)
-    avg_bias = 0
-    avg_survival = np.zeros(weights.size)
+for epoch in tqdm(epochs):
+    weights = np.zeros(X_train[0].size, dtype=float)
+    bias = 0
+    survival = np.zeros(weights.size)
 
-    avg_weights, avg_bias, avg_survival = averaged_correction(avg_weights, X_train,
-            y_train, avg_bias, avg_survival, epoch)
+    # Train the perceptron for the weights
+    weights, bias, survival = averaged_correction(weights, X_train, y_train, bias,
+            survival, epoch)
 
-    avg_prediction = np.zeros(len(y_test))
+    # Storing predicted values
+    prediction = np.zeros(len(y_test))
     for i in range(len(y_test)):
-        avg_prediction[i] = averaged_activation(weights, X_test[i], bias, survival)
+        prediction[i] = averaged_activation(weights, X_test[i], bias, survival)
 
-    # Calculating accuracy of averaged perceptron
-    avg_correct = 0
+    # Calculating accuracy of vanilla perceptron
+    correct = 0
     for i in range(len(y_test)):
-        if avg_prediction[i] == y_test[i]:
-            avg_correct += 1
+        if prediction[i] == y_test[i]:
+            correct += 1
 
-    avg_accuracy.append(avg_correct/y_test.size * 100)
+    avg_accuracy.append(correct/y_test.size * 100)
+
+
 
 #########################
 ####### PLOTTING ########
