@@ -28,7 +28,7 @@ X_test, y_test = X[200:, :], y[200:]
 #########################
 vanilla_accuracy = []
 
-for epoch in tqdm(epochs):
+for epoch in epochs:
     weights = np.zeros(X[0].size, dtype=float)
     bias = 0
 
@@ -54,7 +54,7 @@ for epoch in tqdm(epochs):
 #########################
 avg_accuracy = []
 
-for epoch in tqdm(epochs):
+for epoch in epochs:
     weights = np.zeros(X_train[0].size, dtype=float)
     bias = 0
     survival = np.zeros(weights.size)
@@ -84,3 +84,7 @@ for epoch in tqdm(epochs):
 plt.plot(epochs, vanilla_accuracy, label="Vanilla perceptron")
 plt.plot(epochs, avg_accuracy, label="Averaged perceptron")
 plt.legend()
+plt.xlabel("Number of epochs")
+plt.ylabel("Accuracy (%)")
+plt.title("Accuracy of vanilla vs averaged perceptron")
+plt.show()
