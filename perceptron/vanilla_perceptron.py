@@ -14,7 +14,7 @@ def activation(feature, weights, bias) -> int:
 
 #%%
 # Perceptron training function
-def correction(weights, features, labels, bias=0, epochs=3) -> np.ndarray:
+def correction(weights, features, labels, bias=0, epochs=3):
     for _ in range(epochs):
         for i in range(len(features)):
             act = activation(features[i], weights, bias)
